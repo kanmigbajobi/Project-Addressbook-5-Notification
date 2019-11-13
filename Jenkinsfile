@@ -1,7 +1,3 @@
-#The first line is the node block; This tells which node you want to carry out your buildd
-#Work.
-
-
 node {
         env.JAVA_HOME = tool name: 'My_Java', type: 'jdk'
         def mvnHome = tool name: 'My_Maven', type: 'maven'
