@@ -2,7 +2,7 @@ node {
         env.JAVA_HOME = tool name: 'My_Java', type: 'jdk'
         def mvnHome = tool name: 'My_Maven', type: 'maven'
         def mvnCMD = "${mvnHome}/bin/mvn"
-#Go to  the pipeline syntax, find and click "git"        
+	
     stage("SCM checkout"){
        git  'https://github.com/kanmigbajobi/Project-Addressbook.git'
     }
