@@ -8,7 +8,7 @@ node {
         def mvnCMD = "${mvnHome}/bin/mvn"
 #Go to  the pipeline syntax, find and click "git"        
     stage("SCM checkout"){
-       git  'https://github.com/kanmigbajobi/devops-1.git'
+       git  'https://github.com/kanmigbajobi/Project-Addressbook.git'
     }
 
     stage("validate"){
