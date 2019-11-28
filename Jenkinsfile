@@ -11,7 +11,8 @@ node{
     stage('Build Image') {
         when {
                branch 'master'
-              }
+            }
+     steps {
         input message: 'Would you like to build the Image now? Click Continue to Continue', ok: 'Continue'
         sh label: '', script: 'docker build -t test3 .'
         }
