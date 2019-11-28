@@ -16,6 +16,7 @@ node{
         input message: 'Would you like to build the Image now? Click Continue to Continue', ok: 'Continue'
         sh label: '', script: 'docker build -t test3 .'
         }
+    }
    
    stage('Push Image') {
        withDockerRegistry(credentialsId: 'ecr:eu-west-2:AWSSecretKeysAndAccessKeys', url: 'https://807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3') {
