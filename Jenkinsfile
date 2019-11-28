@@ -1,45 +1,22 @@
-node {
-        env.JAVA_HOME = tool name: 'My_Java', type: 'jdk'
-        def mvnHome = tool name: 'My_Maven', type: 'maven'
-        def mvnCMD = "${mvnHome}/bin/mvn"
-	
-    stage("SCM checkout"){
-       git  'https://github.com/kanmigbajobi/Project-Addressbook.git'
-    }
-
-    stage("validate"){
-        script{
-            echo "validating now"
-            sh "${mvnCMD} validate"
-        }
-    }
-    
-    stage("compile"){
-        script{
-            echo "compling the job now"
-            sh "${mvnCMD} compile"
-        }
-        
-    }
-    stage("test"){
-        script{
-            echo "testing the job now"
-             sh "${mvnCMD} test"
-        }    
-    }
-   stage("package"){
-       script {
-           echo "packaging the Job now"
-	   sh "${mvnCMD} package"
-       }
-       
+node{
+   stage('SCM Checkout'){
+      tool name: 'My_Git', type: 'git'
+      git credentialsId: 'GithubUserPass', url: 'https://github.com/kanmigbajobi/my-app.git'
    }
-   stage("verify"){
-       script {
-           echo "verifying the job now"
-            sh "${mvnCMD} verify"
-       }
-
+   stage('Maven Package'){
+      def mvnhome = tool name: 'My_Maven', type: 'maven'
+      def mvnCMD = "${mvnhome}/bin/mvn"
+      sh label: '', script: "${mvnCMD} clean package"
+   }
+    stage('Build Image') {
+       sh label: '', script: 'docker build -t test3 .'
+        }
+   
+   stage('Push Image') {
+       withDockerRegistry(credentialsId: 'ecr:eu-west-2:AWSSecretKeysAndAccessKeys', url: 'https://807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3') {
+           sh label: '', script: 'docker tag test3:latest 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
+           sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
+        }
    }
 }
  
