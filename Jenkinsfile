@@ -20,5 +20,12 @@ node{
           sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
         }
    }
+   stage('Run container on Dev server'){
+       input message: 'Would you like to build the Image now? Click Continue to Continue', ok: 'Continue'
+       def dockerRun = 'docker run -p 7070:7070 -d --name=my_test sunkyg/mytestimage:${BUILD_NUMBER}'
+       sshagent(['SSH-DEV-SERVER']) {
+           sh "ssh -o StrictHostKeyChecking=no ec2-user@35.176.115.77 ${dockerRun}"
+       }
+    }
 }
  
