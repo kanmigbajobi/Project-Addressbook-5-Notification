@@ -1,2 +1,6 @@
-FROM tomcat:8
-# Take the war and copy to webapps of tomcat
+FROM centos
+RUN yum install httpd -y
+COPY index.html /var/www/html/
+
+CMD [“/usr/sbin/httpd”,” -D”,” FOREGROUND”]
+EXPOSE 80
