@@ -9,23 +9,14 @@ node{
       sh label: '', script: "${mvnCMD} clean package"
    }
     stage('Build Image') {
-        input message: 'Would you like to build the Image now? Click Continue to Continue', ok: 'Continue'
-        sh label: '', script: 'docker build -t test3 .'
-    }
-   
+       sh label: '', script: 'docker build -t test3 .'
+        }
+   stage('Login to ECR'){
+       sh label: '', script: '$(aws ecr get-login --no-include-email --region eu-west-2)'
+   }
    stage('Push Image') {
-       withDockerRegistry(credentialsId: 'ecr:eu-west-2:AWSSecretKeysAndAccessKeys', url: 'https://807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3') {
-          input message: 'Would you like to build the Image now? Click Continue to Continue', ok: 'Continue'
-          sh label: '', script: 'docker tag test3:latest 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
-          sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
+           sh label: '', script: 'docker tag test3:latest 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
+           sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
         }
    }
-   stage('Run container on Dev server'){
-       input message: 'Would you like to build the Image now? Click Continue to Continue', ok: 'Continue'
-       def dockerRun = 'docker run -p 7070:7070 -d --name=my_test sunkyg/mytestimage:${BUILD_NUMBER}'
-       sshagent(['SSH-DEV-SERVER']) {
-           sh "ssh -o StrictHostKeyChecking=no ec2-user@35.176.115.77 ${dockerRun}"
-       }
-    }
 }
- 
