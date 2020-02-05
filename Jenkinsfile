@@ -12,6 +12,16 @@ node{
        sh label: '', script: 'docker build -t test3 .'
         }
    
+   stage('Do testing') {
+            when {
+                branch 'feature1'
+            }
+            steps {
+                sh './test.sh'
+                input message: 'Are you happy to test the code? (Click "Proceed" to continue)'
+            }
+        }
+   
    stage('Push Image') {
        withDockerRegistry(credentialsId: 'ecr:eu-west-2:AWSSecretKeysAndAccessKeys', url: 'https://807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3') {
            sh label: '', script: 'docker tag test3:latest 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
