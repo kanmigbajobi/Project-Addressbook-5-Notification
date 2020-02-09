@@ -1,7 +1,7 @@
 node{
    stage('SCM Checkout'){
       tool name: 'My_Git', type: 'git'
-      git credentialsId: 'GithubUserPass', url: 'https://github.com/kanmigbajobi/Project-Addressbook.git'
+      git credentialsId: 'GithubUserPass', url: 'https://github.com/kanmigbajobi/Project-Addressbook-2.git'
    }
    stage('Maven Package'){
       def mvnhome = tool name: 'My_Maven', type: 'maven'
