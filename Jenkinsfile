@@ -9,13 +9,13 @@ node{
       sh label: '', script: "${mvnCMD} clean package"
    }
     stage('Build Image') {
-       sh label: '', script: 'docker build -t test3 .'
+       sh label: '', script: 'docker build -t project-addressbook-2 .'
         }
    
    stage('Push Image') {
        withDockerRegistry(credentialsId: 'ecr:eu-west-2:AWSSecretKeysAndAccessKeys', url: 'https://807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3') {
-           sh label: '', script: 'docker tag test3:latest 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
-           sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/test3:latest'
+           sh label: '', script: 'docker tag test3:latest 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2:latest'
+           sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2:latest'
         }
    }
 }
