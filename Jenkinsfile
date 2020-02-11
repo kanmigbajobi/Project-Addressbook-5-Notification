@@ -18,4 +18,7 @@ node{
            sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2:latest'
         }
    }
+   stage('Update Service'){
+      sh label: '', script: 'aws ecs update-service --service new-project-2  --force-new-deployment'
+     } 
 }
