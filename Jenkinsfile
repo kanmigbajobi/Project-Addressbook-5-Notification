@@ -19,7 +19,7 @@ node{
         }
    }
    stage('Update Service'){
-      withDockerRegistry(credentialsId: 'AWSSecretKeysAndAccessKeys'){
+      withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWSSecretKeysAndAccessKeys', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
           sh label: '', script: 'aws ecs update-service --service new-project-2  --force-new-deployment --region eu-west-2'
      } 
   }
