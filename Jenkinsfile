@@ -19,6 +19,6 @@ node{
         }
    }
    stage('Update Service'){
-      sh label: '', script: 'aws ecs update-service --service new-project-2  --force-new-deployment'
+      sh label: '', script: 'aws ecs update-service --service new-project-2  --force-new-deployment --region eu-west-2'
      } 
 }
