@@ -19,6 +19,8 @@ node{
         }
    }
    stage('Update Service'){
-      sh label: '', script: 'aws ecs update-service --service new-project-2  --force-new-deployment --region eu-west-2'
+      withDockerRegistry(credentialsId: 'ecr:eu-west-2:AWSSecretKeysAndAccessKeys'}{
+          sh label: '', script: 'aws ecs update-service --service new-project-2  --force-new-deployment --region eu-west-2'
      } 
+  }
 }
