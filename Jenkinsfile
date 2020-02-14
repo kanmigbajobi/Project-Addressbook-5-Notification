@@ -25,7 +25,7 @@ node{
       credentialsId: 'AWSSecretKeysAndAccessKeys', 
       secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
       ]]) {
-          sh label: '', script: 'aws ecs update-service --cluster Project-Addressbook-2 --service Project-Addressbook-2  --force-new-deployment --region eu-west-2'
+          sh label: '', script: 'aws ecs update-service --cluster Friday  --service Friday   --force-new-deployment --region eu-west-2'
      } 
   }
 }
