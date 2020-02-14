@@ -9,7 +9,7 @@ node{
       sh label: '', script: "${mvnCMD} clean package"
    }
     stage('Build Image') {
-       sh label: '', script: 'docker build -t project-addressbook-2-${BUILD_NUMBER} .'
+       sh label: '', script: 'docker build -t project-addressbook-2-${BUILD_NUMBER}:${BUILD_NUMBER} .'
         }
    
    stage('Push Image') {
