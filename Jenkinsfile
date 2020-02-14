@@ -15,7 +15,7 @@ node{
    stage('Push Image') {
        withDockerRegistry(credentialsId: 'ecr:eu-west-2:AWSSecretKeysAndAccessKeys', url: 'https://807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2') {
            sh label: '', script: 'docker tag project-addressbook-2-${BUILD_NUMBER}:latest 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2-${BUILD_NUMBER}:${BUILD_NUMBER}'
-           sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2:${BUILD_NUMBER}'
+           sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2:latest'
         }
    }
    stage('Update Service'){
