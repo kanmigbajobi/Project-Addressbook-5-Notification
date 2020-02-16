@@ -11,7 +11,7 @@ pipeline {
   }
     stage('Maven Package'){
      when {
-  branch 'master'
+  branch 'dev'
      }
       steps{
          sh label: '', script: "mvn clean package"
