@@ -9,19 +9,19 @@ pipeline {
         
     }
   } 
-    stage('Dfine MVN'){
-      steps{
-        def mvnhome = tool name: 'My_Maven', type: 'maven'
-        }
-    }
 
     stage('Maven Package'){
      when {
-  branch 'dev'
+  branch 'master'
      }
       steps{
          sh label: '', script: "mvn clean package"
         } 
+      }
+    stage('Build Image') {
+      steps{
+            sh label: '', script: 'docker build -t project-addressbook-3 .'
+        }
       }
     }
   }
