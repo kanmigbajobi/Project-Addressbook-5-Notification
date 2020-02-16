@@ -20,8 +20,16 @@ pipeline {
       }
     stage('Build Image') {
       steps{
-            sh label: '', script: 'docker build -t project-addressbook-3 .'
+            sh label: '', script: 'docker build -t project-addressbook-Declarative-4 .'
         }
       }
+      stage('Push Image') {
+        steps{
+           withDockerRegistry(credentialsId: 'ecr:eu-west-2:AWSSecretKeysAndAccessKeys', url: 'https://807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2') {
+              sh label: '', script: 'docker tag project-addressbook-2 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2'
+              sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-2'
+        }
+      }
+     }
     }
   }
