@@ -10,6 +10,9 @@ pipeline {
     }
   }
     stage('Maven Package'){
+     when {
+  branch 'dev'
+     }
       steps{
          sh label: '', script: "mvn clean package"
         } 
