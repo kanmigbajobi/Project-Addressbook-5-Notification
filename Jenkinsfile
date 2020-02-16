@@ -21,6 +21,7 @@ pipeline {
     stage('Build Dev Image ') {
      when {
     branch 'dev'
+      }
        steps{
             sh label: '', script: 'docker build -t project-addressbook-declarative-4-dev .'
         }
@@ -29,6 +30,7 @@ pipeline {
      stage('Build Prod Image ') {
      when {
     branch 'prod'
+       }
        steps{
             sh label: '', script: 'docker build -t project-addressbook-declarative-4-prod .'
         }
@@ -63,5 +65,5 @@ pipeline {
        }
      }   
     }
-  }
  }
+ 
