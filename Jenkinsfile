@@ -30,7 +30,7 @@ pipeline {
      
      stage('Build Prod Image ') {
      when {
-    branch 'prod'
+    branch 'master'
        }
        steps{
             sh label: '', script: '$(aws ecr get-login --no-include-email --region eu-west-3)'
