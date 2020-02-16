@@ -51,8 +51,8 @@ pipeline {
            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
            ]]) {
 
-              sh label: '', script: 'docker tag project-addressbook-declarative-4-dev 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-declaractive-4-dev'
-              sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-declaractive-4-dev'
+              sh label: '', script: 'docker tag project-addressbook-declarative-4-dev 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-declarative-4-dev'
+              sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-2.amazonaws.com/project-addressbook-declarative-4-dev-4-dev'
         }
       }
      }
