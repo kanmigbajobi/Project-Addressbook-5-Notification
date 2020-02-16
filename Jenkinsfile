@@ -1,3 +1,33 @@
+properties([parameters([choice(choices: ['dev', 'master'], description: '', name: 'branch')])])
+pipeline {
+    agent any 
+  stages {
+    stage('SCM Checkout'){
+      tool name: 'My_Git', type: 'git'
+      git credentialsId: 'GithubUserPass', url: 'https://github.com/kanmigbajobi/Project-Addressbook-2.git'
+   }
+    stage('Maven Package'){
+      def mvnhome = tool name: 'My_Maven', type: 'maven'
+      def mvnCMD = "${mvnhome}/bin/mvn"
+      sh label: '', script: "${mvnCMD} clean package"
+   }
+
+    stage ('1 choice') {
+      when {
+                expression { choice == '1'}
+            }
+            steps {
+                echo "Hello, Choice 1!"
+            }
+    }
+
+
+
+
+
+
+
+
 node{
    stage('SCM Checkout'){
       tool name: 'My_Git', type: 'git'
@@ -28,4 +58,4 @@ node{
           sh label: '', script: 'aws ecs update-service --cluster Friday  --service Friday   --force-new-deployment --region eu-west-2'
      } 
   }
-}
+i}
