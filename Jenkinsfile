@@ -23,6 +23,7 @@ pipeline {
     branch 'dev'
       }
        steps{
+            sh label: '', script: '$(aws ecr get-login --no-include-email --region eu-west-2)'
             sh label: '', script: 'docker build -t project-addressbook-declarative-4-dev .'
         }
       }
@@ -32,6 +33,7 @@ pipeline {
     branch 'prod'
        }
        steps{
+            sh label: '', script: '$(aws ecr get-login --no-include-email --region eu-west-3)'
             sh label: '', script: 'docker build -t project-addressbook-declarative-4-prod .'
         }
       }
