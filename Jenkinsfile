@@ -56,7 +56,7 @@ pipeline {
         }
       }
      }
-   def gateway_to-Production () {
+
      stage ('Gateway to Prod') {
         when { 
      branch 'master'
@@ -72,7 +72,7 @@ pipeline {
         }   
       }
     }
-  }
+
          
      stage('Push Image to Prod') {
         when {
