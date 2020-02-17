@@ -82,10 +82,12 @@ pipeline {
            } 
          }
        }
-      stage('Update Service'){
+      
+     stage('Update Service'){
        when {
          branch 'dev'
           }
+        steps {
            withCredentials([[
            $class: 'AmazonWebServicesCredentialsBinding',
            accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
@@ -94,12 +96,14 @@ pipeline {
            ]]) {
                sh label: '', script: 'aws ecs update-service --cluster Friday  --service Friday   --force-new-deployment --region eu-west-2'
        }       
-    }
+     }
+   }
     
-    stage('Update Service'){
+     stage('Update Service'){
        when {
          branch 'master'
           }
+        steps {
            withCredentials([[
            $class: 'AmazonWebServicesCredentialsBinding',
            accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
@@ -107,11 +111,8 @@ pipeline {
            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
            ]]) {
                sh label: '', script: 'aws ecs update-service --cluster Friday  --service Friday   --force-new-deployment --region eu-west-3'
-       }       
-    }
-
-
+         }       
+       }
      }   
-    }
+   }
  }
- 
