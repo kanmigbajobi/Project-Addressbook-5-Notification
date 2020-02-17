@@ -56,6 +56,16 @@ pipeline {
         }
       }
      }
+
+     stage ('Gateway to Prod') {
+        when { 
+     branch 'master'
+           }
+        steps{
+           input message: 'You are about to deploy to Production, Do You want to carry on?', ok: 'Yes', parameters: [string(defaultValue: '', description: 'You will be deploying to Production', name: 'Aceptance', trim: true)]
+     }
+   }
+     
      stage('Push Image to Prod') {
         when {
       branch 'master'
@@ -71,6 +81,35 @@ pipeline {
 		sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-3.amazonaws.com/project-addressbook-declarative-4-prod'
          }
        }
+      stage('Update Service'){
+       when {
+         branch 'dev'
+          }
+           withCredentials([[
+           $class: 'AmazonWebServicesCredentialsBinding',
+           accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+           credentialsId: 'AWSSecretKeysAndAccessKeys',
+           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+           ]]) {
+               sh label: '', script: 'aws ecs update-service --cluster Friday  --service Friday   --force-new-deployment --region eu-west-2'
+       }       
+    }
+    
+    stage('Update Service'){
+       when {
+         branch 'master'
+          }
+           withCredentials([[
+           $class: 'AmazonWebServicesCredentialsBinding',
+           accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+           credentialsId: 'AWSSecretKeysAndAccessKeys',
+           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+           ]]) {
+               sh label: '', script: 'aws ecs update-service --cluster Friday  --service Friday   --force-new-deployment --region eu-west-3'
+       }       
+    }
+
+
      }   
     }
  }
