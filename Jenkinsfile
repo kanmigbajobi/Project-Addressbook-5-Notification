@@ -79,6 +79,7 @@ pipeline {
            ]]) {
                 sh label: '', script: 'docker tag project-addressbook-declarative-4-prod 807395240887.dkr.ecr.eu-west-3.amazonaws.com/project-addressbook-declarative-4-prod'
 		sh label: '', script: 'docker push 807395240887.dkr.ecr.eu-west-3.amazonaws.com/project-addressbook-declarative-4-prod'
+           } 
          }
        }
       stage('Update Service'){
