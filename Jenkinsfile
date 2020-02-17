@@ -83,7 +83,7 @@ pipeline {
          }
        }
       
-     stage('Update Service'){
+     stage('Update Staging Service'){
        when {
          branch 'dev'
           }
@@ -99,7 +99,7 @@ pipeline {
      }
    }
     
-     stage('Update Service'){
+     stage('Update Prod Service'){
        when {
          branch 'master'
           }
