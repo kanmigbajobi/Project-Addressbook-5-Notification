@@ -63,8 +63,8 @@ pipeline {
            }
         steps{
             input(
-            id: 'userInput', message: 'This is PRODUCTION!', parameters: [
-            [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Please confirm you sure to proceed']
+            id: 'userInput', message: 'THIS IS TO CONFIRM YOU ARE HAPPY TO PROCEED TO PRODUCTION!!!!', parameters: [
+            [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Kindly accept to proceed to production']
         ])
       }
     }
